@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>食荐 FoodPick · 界面原型（低保真线框图）</title>
+<style>
+  :root{
+    --orange:#ff7a18;
+    --orange-light:#fff3e8;
+    --orange-soft:#ffe2c8;
+    --ink:#2b2b2b;
+    --gray:#8a8a8a;
+    --line:#e6e6e6;
+    --bg:#f7f7f7;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;padding:0 0 60px;
+    font-family:"Microsoft YaHei","PingFang SC","Segoe UI",sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.6;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px;}
+  /* 文档头 */
+  .doc-head{
+    background:linear-gradient(135deg,#ff9a3c,#ff6a00);
+    color:#fff;padding:38px 20px 30px;margin-bottom:26px;
+    box-shadow:0 4px 18px rgba(255,106,0,.25);
+  }
+  .doc-head h1{margin:0 0 6px;font-size:26px;letter-spacing:1px;}
+  .doc-head p{margin:2px 0;font-size:13px;opacity:.95;}
+  .doc-head .meta{margin-top:12px;font-size:12px;opacity:.9;}
+  /* 页章节 */
+  .page{
+    background:#fff;border-radius:12px;padding:22px 24px 26px;
+    margin-bottom:26px;box-shadow:0 2px 10px rgba(0,0,0,.06);
+    border:1px solid #eee;
+  }
+  .page-title{
+    display:flex;align-items:center;gap:10px;
+    font-size:19px;font-weight:700;margin:0 0 4px;color:#222;
+  }
+  .page-title .num{
+    background:var(--orange);color:#fff;font-size:13px;
+    border-radius:6px;padding:2px 9px;font-weight:700;
+  }
+  .page-sub{color:var(--gray);font-size:13px;margin:0 0 16px;}
+  .sec-label{
+    font-size:13px;font-weight:700;color:var(--orange);
+    margin:18px 0 8px;padding-left:9px;border-left:3px solid var(--orange);
+  }
+  /* 线框图本体 */
+  .wf{
+    background:#fbfbfb;border:1px dashed #c9c9c9;border-radius:10px;
+    padding:14px;overflow-x:auto;
+  }
+  .wf pre{
+    margin:0;font-family:Consolas,"Courier New",monospace;
+    font-size:12px;line-height:1.5;color:#333;white-space:pre;
+  }
+  /* 原图 */
+  .shot{margin:18px 0 0;text-align:center;}
+  .shot img{
+    max-width:100%;border:1px solid #ddd;border-radius:10px;
+    box-shadow:0 3px 12px rgba(0,0,0,.10);
+  }
+  .shot .cap{font-size:12px;color:var(--gray);margin-top:8px;}
+  /* 说明表 */
+  table{width:100%;border-collapse:collapse;margin-top:12px;font-size:13px;}
+  th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;}
+  th{background:var(--orange-light);color:#b85c00;font-weight:700;}
+  td code{background:#f2f2f2;padding:1px 5px;border-radius:4px;font-size:12px;}
+  .note{
+    background:var(--orange-light);border-left:4px solid var(--orange);
+    padding:10px 14px;border-radius:6px;font-size:13px;margin-top:12px;
+  }
+  .tag{
+    display:inline-block;background:var(--orange-soft);color:#a34a00;
+    font-size:11px;border-radius:4px;padding:1px 7px;margin-right:6px;
+  }
+  h2.section{
+    font-size:16px;margin:34px 0 12px;color:#444;
+    padding-bottom:6px;border-bottom:2px solid var(--orange);
+  }
+</style>
+</head>
+<body>
+
+<div class="doc-head">
+  <div class="wrap">
+    <h1>🥡 食荐 FoodPick · 界面原型文档</h1>
+    <p>校园美食推荐平台 —— 低保真线框图（Wireframe）</p>
+    <p>对应需求文档：需求文档.md v1.1 ｜ 技术形态：B/S 架构 Web 应用（浏览器访问，适配 1366px+）</p>
+    <div class="meta">文档版本 v1.1 ｜ 编写日期 2026-10-15 ｜ 共 6 个页面</div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="note" style="margin-bottom:26px;">
+    <b>阅读说明：</b>每个页面先给出<b>低保真线框图</b>（结构说明），紧跟该页面对应的<b>AI 生成效果参考图</b>（视觉参考）。
+    线框图说明"页面有什么、点了去哪"，参考图说明"大概长什么样"。两者一一对应。
+  </div>
+
+  <!-- ============ 0. 统一规范 ============ -->
+  <h2 class="section">〇、全局统一规范</h2>
+  <table>
+    <tr><th style="width:150px;">项目</th><th>统一规则</th></tr>
+    <tr><td>终端形态</td><td>全部 6 页统一为 <b>Web 端</b>（浏览器访问，适配 1366px 及以上分辨率）</td></tr>
+    <tr><td>顶部导航</td><td><code>🍜 校园美食推荐平台</code> + <code>首页</code> / <code>餐厅列表</code> / <code>个性化推荐</code> / <code>个人中心</code> + 右侧 <code>登录</code>（登录后显示头像）</td></tr>
+    <tr><td>底部页脚</td><td><code>校园美食推荐平台 ©2026</code></td></tr>
+    <tr><td>注册字段</td><td>用户名、密码、确认密码、邮箱、昵称（与需求文档 F-USER-01 一致，不含手机验证码）</td></tr>
+    <tr><td>不做的功能</td><td>不做"消息"模块、不做"订单"业务——导航与页面中均不出现</td></tr>
+    <tr><td>页面范围</td><td>本版本原型共 <b>6 个页面</b>：登录、注册、首页、菜品/餐厅详情、个性化推荐、个人中心（不含独立的餐厅列表页）</td></tr>
+    <tr><td>主要配色</td><td>主色 暖橙 <code>#ff7a18</code>；网页底色 浅灰 <code>#f7f7f7</code>；卡片 白色圆角</td></tr>
+  </table>
+
+  <!-- ============ 1. 登录页 ============ -->
+  <div class="page">
+    <div class="page-title"><span class="num">页面 1</span>登录页 <span style="color:#bbb;font-weight:400;font-size:13px;">login</span></div>
+    <p class="page-sub"><span class="tag">Web 端</span>用户输入用户名、密码登录，登录成功签发 Token。</p>
+
+    <div class="sec-label">① 线框图（结构）</div>
+    <div class="wf"><pre>
+┌──────────────────────────────────────────────────────────┐
+│ 🍜 校园美食推荐平台     首页 餐厅列表 个性化推荐 个人中心   [登录] │
+├──────────────────────────────────────────────────────────┤
+│                                                          │
+│   ┌─────────────────────┐      ┌───────────────────┐    │
+│   │  欢迎回来 👋           │      │                   │    │
+│   │  登录后获取个性化推荐     │      │    美食装饰插画      │    │
+│   │                     │      │  （拉面 / 汉堡 / 饮料）│    │
+│   │  用户名                │      │                   │    │
+│   │  [ 请输入用户名         ] │      │                   │    │
+│   │                     │      │                   │    │
+│   │  密码                 │      │                   │    │
+│   │  [ 请输入密码           ] │      │                   │    │
+│   │                     │      │                   │    │
+│   │  [       登 录        ] │      │                   │    │
+│   │                     │      │                   │    │
+│   │  还没有账号？立即注册       │      │                   │    │
+│   └─────────────────────┘      └───────────────────┘    │
+│                                                          │
+├──────────────────────────────────────────────────────────┤
+│                  校园美食推荐平台 ©2026                     │
+└──────────────────────────────────────────────────────────┘
+</pre></div>
+
+    <div class="sec-label">② 对应效果参考图</div>
+    <div class="shot">
+      <img src="原型图_资源/denglu.jpg" alt="登录页">
+      <div class="cap">图 1 · 登录页效果参考图</div>
+    </div>
+
+    <div class="note">对应需求功能：<b>F-USER-02 登录</b>。输入用户名 + 密码，点击「登录」→ 校验通过后跳转首页。</div>
+  </div>
+
+  <!-- ============ 2. 注册页 ============ -->
+  <div class="page">
+    <div class="page-title"><span class="num">页面 2</span>注册页 <span style="color:#bbb;font-weight:400;font-size:13px;">register</span></div>
+    <p class="page-sub"><span class="tag">Web 端</span>新用户注册，字段与需求文档一致：用户名 / 密码 / 确认密码 / 邮箱 / 昵称。</p>
+
+    <div class="sec-label">① 线框图（结构）</div>
+    <div class="wf"><pre>
+┌──────────────────────────────────────────────────────────┐
+│ 🍜 校园美食推荐平台     首页 餐厅列表 个性化推荐 个人中心   [登录] │
+├──────────────────────────────────────────────────────────┤
+│   ┌─────────────────────┐      ┌───────────────────┐    │
+│   │  发现校园周边美味        │      │  新用户注册         │    │
+│   │  按口味推荐，快速选择     │      │  注册后开启美食推荐    │    │
+│   │                     │      │                   │    │
+│   │    美食装饰图集          │      │  用户名             │    │
+│   │  （汉堡 / 炒面 / 牛肉面） │      │  [ 4-20位，全局唯一   ]│    │
+│   │                     │      │  密码               │    │
+│   │                     │      │  [ 6-50位           ]│    │
+│   │                     │      │  确认密码            │    │
+│   │                     │      │  [ 再次输入密码        ]│    │
+│   │                     │      │  邮箱               │    │
+│   │                     │      │  [ example@qq.com   ]│    │
+│   │                     │      │  昵称               │    │
+│   │                     │      │  [ 怎么称呼你         ]│    │
+│   │                     │      │  ☐ 我已阅读并同意服务协议 │    │
+│   │                     │      │  [      注 册        ]│    │
+│   │                     │      │  已有账号？前往登录      │    │
+│   └─────────────────────┘      └───────────────────┘    │
+├──────────────────────────────────────────────────────────┤
+│                  校园美食推荐平台 ©2026                     │
+└──────────────────────────────────────────────────────────┘
+</pre></div>
+
+    <div class="sec-label">② 对应效果参考图</div>
+    <div class="shot">
+      <img src="原型图_资源/zhuce.jpg" alt="注册页">
+      <div class="cap">图 2 · 注册页效果参考图</div>
+    </div>
+
+    <div class="note">
+      对应需求功能：<b>F-USER-01 注册</b>。&nbsp;
+      <b>与原图差异：</b>原效果图为「手机号 + 手机号 + 验证码 + 验证码」（字段重复），线框图已按需求文档改为「用户名 / 密码 / 确认密码 / 邮箱 / 昵称」，删去手机验证码。
+    </div>
+  </div>
+
+  <!-- ============ 3. 首页 ============ -->
+  <div class="page">
+    <div class="page-title"><span class="num">页面 3</span>首页 <span style="color:#bbb;font-weight:400;font-size:13px;">index</span></div>
+    <p class="page-sub"><span class="tag">Web 端</span>搜索 + 分类筛选 + 优惠推荐 / 美食推荐双栏内容。</p>
+
+    <div class="sec-label">① 线框图（结构）</div>
+    <div class="wf"><pre>
+┌──────────────────────────────────────────────────────────┐
+│ 🍜 校园美食推荐平台     首页 餐厅列表 个性化推荐 个人中心   [登录] │
+├──────────────────────────────────────────────────────────┤
+│  [ 🔍 搜索店名 / 菜品名称                    ]  [ 搜 索 ]  │
+├──────────────────────────────────────────────────────────┤
+│ 分类： [麻辣烫] [面食] [奶茶甜品] [快餐] [地方菜系] [特价团]  │
+├────────────────────────────┬─────────────────────────────┤
+│  优惠推荐 >                 │  美食推荐 >                  │
+│  ┌────────┐ ┌────────┐    │  ┌────────┐ ┌────────┐     │
+│  │ 店铺图   │ │ 店铺图   │    │  │ 菜品图   │ │ 菜品图   │     │
+│  │ 老王麻辣烫│ │ 校园拉面屋│    │  │ 麻辣香锅  │ │ 番茄肥牛面│     │
+│  │ ⭐4.7    │ │ ⭐4.8    │    │  │ ¥22  ⊕  │ │ ¥19  ⊕  │     │
+│  └────────┘ └────────┘    │  └────────┘ └────────┘     │
+│  ┌────────┐ ┌────────┐    │  ┌────────┐ ┌────────┐     │
+│  │ 店铺卡片  │ │ 店铺卡片  │    │  │ 菜品卡片  │ │ 菜品卡片  │     │
+│  └────────┘ └────────┘    │  └────────┘ └────────┘     │
+│  （共 6 个店铺卡片）          │  （共 4 个菜品卡片）           │
+├────────────────────────────┴─────────────────────────────┤
+│                  校园美食推荐平台 ©2026                     │
+└──────────────────────────────────────────────────────────┘
+</pre></div>
+
+    <div class="sec-label">② 对应效果参考图</div>
+    <div class="shot">
+      <img src="原型图_资源/shouye.jpg" alt="首页">
+      <div class="cap">图 3 · 首页效果参考图</div>
+    </div>
+
+    <div class="note">
+      对应需求功能：<b>F-REST-01 餐厅列表</b>、<b>F-REST-03 关键词搜索</b>。&nbsp;
+      <b>与原图差异：</b>删除原效果图底部"首页 | 推荐 | 消息 | 我的"移动端底栏（Web 端不使用）；分类标签去重；卡片乱码文字替换为真实餐厅名 / 评分 / 价格。
+    </div>
+  </div>
+
+  <!-- ============ 4. 餐厅详情页 ============ -->
+  <div class="page">
+    <div class="page-title"><span class="num">页面 4</span>餐厅 / 菜品详情页 <span style="color:#bbb;font-weight:400;font-size:13px;">detail</span></div>
+    <p class="page-sub"><span class="tag">Web 端</span>展示餐厅与菜品信息、用户评价，可收藏。</p>
+
+    <div class="sec-label">① 线框图（结构）</div>
+    <div class="wf"><pre>
+┌──────────────────────────────────────────────────────────┐
+│ 🍜 校园美食推荐平台     首页 餐厅列表 个性化推荐 个人中心   [登录] │
+├──────────────────────────────────────────────────────────┤
+│  ┌──────────────────┐   香辣牛肉拉面                        │
+│  │   餐厅 / 菜品大图   │   校园拉面小屋 · ⭐4.8 · ¥18          │
+│  └──────────────────┘   [面食] [微辣]          [❤ 收藏菜品] │
+├──────────────────────────────────────────────────────────┤
+│  [ 菜品介绍 ]   [ 店铺信息 ]                               │
+│  ──────────────────────────────────────────────────      │
+│  菜品描述：牛肉软烂入味，汤底浓郁，面条劲道，适合午餐晚餐。    │
+│  地址　　：校园商业街二楼18号                                │
+│  营业时间：10:00 - 21:00                                  │
+│  联系电话：138****1234                                    │
+│  人均消费：15 - 20 元                                     │
+├──────────────────────────────────────────────────────────┤
+│  用户评价                                                 │
+│  👤 小明：辣味刚好，汤头很香，出餐快，适合下课后吃。   ⭐5     │
+│  👤 小红：分量足，面条劲道，性价比高。                ⭐4     │
+│  👤 阿杰：味道不错，就是等位有点久。                  ⭐4     │
+├──────────────────────────────────────────────────────────┤
+│  [ 返回列表 ]                                             │
+├──────────────────────────────────────────────────────────┤
+│                  校园美食推荐平台 ©2026                     │
+└──────────────────────────────────────────────────────────┘
+</pre></div>
+
+    <div class="sec-label">② 对应效果参考图</div>
+    <div class="shot">
+      <img src="原型图_资源/xiangqingye.jpg" alt="详情页">
+      <div class="cap">图 4 · 餐厅 / 菜品详情页效果参考图</div>
+    </div>
+
+    <div class="note">
+      对应需求功能：<b>F-REST-02 餐厅详情</b>、<b>F-REV-02 查看评价列表</b>、<b>F-FAV-01 收藏餐厅</b>。<br>
+      <b>与原图差异：</b>原效果图中「地址」字段与菜品描述文字重叠错位（"地址：学校一食烂入味…"），线框图已将"菜品描述"与"地址"拆分为独立两行；评价区乱码替换为真实评价内容。
+    </div>
+  </div>
+
+  <!-- ============ 5. 个性化推荐页 ============ -->
+  <div class="page">
+    <div class="page-title"><span class="num">页面 5</span>个性化推荐页 <span style="color:#bbb;font-weight:400;font-size:13px;">recommend</span></div>
+    <p class="page-sub"><span class="tag">Web 端</span>根据用户口味、预算给出推荐结果，含推荐理由与得分。</p>
+
+    <div class="sec-label">① 线框图（结构）</div>
+    <div class="wf"><pre>
+┌──────────────────────────────────────────────────────────┐
+│ 🍜 校园美食推荐平台     首页 餐厅列表 个性化推荐 个人中心   [登录] │
+├──────────────────────────────────────────────────────────┤
+│                 今天吃什么？别再纠结了。                     │
+│           根据你的口味、预算，30 秒给你一个靠谱答案。           │
+│  [ 搜索美食、菜品或口味，如：火锅、麻辣烫      ]  [ 搜索 ]    │
+│  筛选： [位置 ▾] [预算 ▾] [偏好 ▾] [口味偏好 ▾]             │
+│                [ 🎲 帮我决定 · 今天吃什么 ]                 │
+├──────────────────────────────────────────────────────────┤
+│  🔥 附近热门                                  查看全部 >    │
+│  ┌──────────┐  ┌──────────┐                             │
+│  │ 麻辣香锅图 │  │ 番茄肥牛面 │                             │
+│  │ 麻辣香锅   │  │ 番茄肥牛面 │                             │
+│  │ ¥22 ⭐4.7 │  │ ¥19 ⭐4.6 │                             │
+│  └──────────┘  └──────────┘                             │
+├──────────────────────────────────────────────────────────┤
+│  为我推荐（按得分排序）                                      │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐               │
+│  │ 推荐卡片 1 │  │ 推荐卡片 2 │  │ 推荐卡片 3 │               │
+│  │ 得分 0.92 │  │ 得分 0.87 │  │ 得分 0.81 │               │
+│  │ 理由：口味合│  │ 理由：预算合│  │ 理由：高分  │               │
+│  └──────────┘  └──────────┘  └──────────┘               │
+├──────────────────────────────────────────────────────────┤
+│                  校园美食推荐平台 ©2026                     │
+└──────────────────────────────────────────────────────────┘
+</pre></div>
+
+    <div class="sec-label">② 对应效果参考图</div>
+    <div class="shot">
+      <img src="原型图_资源/pianhao.jpg" alt="个性化推荐页">
+      <div class="cap">图 5 · 个性化推荐页效果参考图</div>
+    </div>
+
+    <div class="note">
+      对应需求功能：<b>F-REC-01 个性化推荐</b>。推荐结果含"推荐理由 + 得分"，按加权算法排序取 Top 10。
+    </div>
+  </div>
+
+  <!-- ============ 6. 个人中心页 ============ -->
+  <div class="page">
+    <div class="page-title"><span class="num">页面 6</span>个人中心 <span style="color:#bbb;font-weight:400;font-size:13px;">profile</span></div>
+    <p class="page-sub"><span class="tag">Web 端</span>查看个人信息、我的收藏、我的评价，可维护口味偏好。</p>
+
+    <div class="sec-label">① 线框图（结构）</div>
+    <div class="wf"><pre>
+┌──────────────────────────────────────────────────────────┐
+│ 🍜 校园美食推荐平台     首页 餐厅列表 个性化推荐 个人中心   [头像] │
+├──────────────────────────────────────────────────────────┤
+│  👤 爱吃辣的干饭人            校园美食爱好者                │
+│     手机号 ｜ 口味偏好                                     │
+├────────────────────────────┬─────────────────────────────┤
+│  我的收藏 >                 │  我的评价 >                  │
+│  ┌────┐┌────┐┌────┐      │  ┌─────────────────────┐   │
+│  │麻辣香锅││拉面小店││奶茶驿站│      │  │ 口味很棒，分量足      │   │
+│  └────┘└────┘└────┘      │  │ 校园拉面小屋      ⭐5 │   │
+│  ┌────┐                   │  └─────────────────────┘   │
+│  │奶茶饮品│                  │  ┌─────────────────────┐   │
+│  └────┘                   │  │ 味道不错，会再来      │   │
+│                           │  │ 老王麻辣烫        ⭐4 │   │
+│                           │  └─────────────────────┘   │
+│                           │  [修改个人资料] [退出登录]    │
+├────────────────────────────┴─────────────────────────────┤
+│                  校园美食推荐平台 ©2026                     │
+└──────────────────────────────────────────────────────────┘
+</pre></div>
+
+    <div class="sec-label">② 对应效果参考图</div>
+    <div class="shot">
+      <img src="原型图_资源/gerenzhongxin.jpg" alt="个人中心">
+      <div class="cap">图 6 · 个人中心效果参考图</div>
+    </div>
+
+    <div class="note">
+      对应需求功能：<b>F-FAV-03 我的收藏列表</b>、<b>F-USER-03 查看个人信息</b>、<b>F-USER-05 维护口味偏好</b>。<br>
+      <b>与原图差异：</b>补充 Web 端顶部导航栏与底部页脚；"退出登录""修改个人资料"按钮保留。
+    </div>
+  </div>
+
+  <!-- ============ 页面清单 ============ -->
+  <h2 class="section">附录：页面清单与需求功能对照</h2>
+  <table>
+    <tr><th style="width:70px;">序号</th><th style="width:150px;">页面</th><th>对应需求功能编号</th></tr>
+    <tr><td>1</td><td>登录页 login</td><td>F-USER-02 登录</td></tr>
+    <tr><td>2</td><td>注册页 register</td><td>F-USER-01 注册</td></tr>
+    <tr><td>3</td><td>首页 index</td><td>F-REST-01 餐厅列表、F-REST-03 关键词搜索</td></tr>
+    <tr><td>4</td><td>详情页 detail</td><td>F-REST-02 餐厅详情、F-REV-02 查看评价、F-FAV-01 收藏</td></tr>
+    <tr><td>5</td><td>个性化推荐页 recommend</td><td>F-REC-01 个性化推荐</td></tr>
+    <tr><td>6</td><td>个人中心 profile</td><td>F-FAV-03 我的收藏、F-USER-03 个人信息、F-USER-05 维护偏好</td></tr>
+  </table>
+
+  <div class="note" style="margin-top:16px;">
+    <b>交付说明：</b>本文件为低保真线框图，说明各页面的交互结构；随附的效果参考图（AI 生成）用作视觉风格参考。
+    所有页面统一为 Web 端形态，导航与页脚保持一致，不包含"消息"与"订单"功能。
+  </div>
+
+  <p style="text-align:center;color:#aaa;font-size:12px;margin-top:34px;">— 文档结束 —</p>
+</div>
+</body>
+</html>
