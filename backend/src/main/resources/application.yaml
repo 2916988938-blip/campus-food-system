@@ -1,0 +1,7 @@
+# 校园美食推荐平台 - 配置文件
+server:
+  port: 8080
+
+spring:
+  application:
+    name: campus-food-system
