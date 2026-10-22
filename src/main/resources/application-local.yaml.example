@@ -1,0 +1,16 @@
+# 本地私有配置示例
+#
+# 用法：复制本文件为 application-local.yaml（去掉 .example 后缀），
+# 填上自己的数据库密码即可。application-local.yaml 已被 .gitignore 排除，
+# 不会被提交到 Git 仓库。
+#
+# 启动时自动加载（Spring Boot 默认支持 application-{profile} 只在指定 profile 时生效，
+# 因此本项目在 application.yaml 中通过 spring.config.import 引入可选本地文件，
+# 或者直接用 IDE 运行配置里的 VM options 指定 -Dspring.profiles.active=local）。
+spring:
+  config:
+    activate:
+      on-profile: local
+  datasource:
+    username: root
+    password: "在这里填你的数据库密码"
