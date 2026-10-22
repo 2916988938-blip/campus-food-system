@@ -9,6 +9,7 @@ import java.util.List;
 @Mapper
 public interface RestaurantMapper {
 
-
+  @Select("SELECT * FROM restaurants WHERE status = 1")
+    List<Restaurant> findAll();
 
 }
